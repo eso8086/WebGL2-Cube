@@ -1,0 +1,21 @@
+{
+  "name": "webgl-cube",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+    "build": "tsc && node build.mjs",
+    "build-watch": "tsc && node build.mjs --watch",
+    "serve": "tsc && node serve.mjs",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "description": "WebGL cube for education purposes",
+  "devDependencies": {
+    "@types/node": "^22.9.2",
+    "@types/typescript": "^0.4.29",
+    "esbuild": "0.24.0",
+    "typescript": "^5.7.2"
+  }
+}
