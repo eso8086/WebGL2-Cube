@@ -15,3 +15,5 @@ Project uses Esbuild for bundling application. By default minification is turned
 
 to run application run 
 ```npm run serve```
+
+![scene.png](scene.png)
