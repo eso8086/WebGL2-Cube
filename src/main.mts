@@ -2,7 +2,7 @@ import {Mesh} from "./mesh.mts";
 import Shader from "./shader.mts";
 import ModelReader, {IModelData} from "./model-reader.mts";
 import {mat4} from "gl-matrix";
-import {loadTextures} from "./utils.mts";
+import {getTextureImage} from "./utils.mts";
 
 if(!window.canvas){
     throw `ERROR - <canvas id="canvas"></canvas> element not found in DOM`;
@@ -39,9 +39,9 @@ const modelData: IModelData = modelReader.read();
 const mesh = new Mesh(modelData, shader);
 
 const texturePromise: Promise<[HTMLImageElement, HTMLImageElement, HTMLImageElement]> = Promise.all([
-    loadTextures("/src/textures/bottom.jpg"),
-    loadTextures("/src/textures/side.jpg"),
-    loadTextures("/src/textures/top.jpg")
+    getTextureImage("/src/textures/bottom.jpg"),
+    getTextureImage("/src/textures/side.jpg"),
+    getTextureImage("/src/textures/top.jpg")
 ]);
 
 
