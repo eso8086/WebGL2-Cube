@@ -9,7 +9,6 @@ on:
       - main
 
 
-# Sets permissions of the GITHUB_TOKEN to allow deployment to GitHub Pages
 permissions:
   contents: read
   pages: write
@@ -37,17 +36,13 @@ jobs:
       - name: Bundling with esbuild
         run: node serve.mjs --no-watch
 
-      - name: Creating symlink of esbuild output
-        run: ln -s ./dist/out.js out.js
-      - name: Test
-        run: ls -la
       - name: Setup Pages
         uses: actions/configure-pages@v5
 
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
         with:
-          path: .
+          path: dist
   deploy:
     environment:
       name: github-pages
