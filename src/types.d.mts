@@ -2,7 +2,7 @@
 export declare global{
     interface Window{
         canvas: HTMLCanvasElement,
-        gl: WebGL2RenderingContext | null
+        gl: WebGL2RenderingContext
     }
 
     const canvas: HTMLCanvasElement
