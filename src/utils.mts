@@ -1,4 +1,4 @@
-export async function loadTextures(src: string): Promise<HTMLImageElement> {
+export async function getTextureImage(src: string): Promise<HTMLImageElement> {
     const res: Response = await fetch(src);
     if(!res.ok){
         alert(`Failed to load image - ${src}`);
