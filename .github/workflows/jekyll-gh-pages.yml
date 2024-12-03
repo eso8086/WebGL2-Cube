@@ -26,6 +26,9 @@ jobs:
       - name: Build project
         run: npm run build-serve
 
+      - name: Bundling with esbuild
+        run: node serve.mjs --no-watch
+
       - name: Setup Pages
         uses: actions/configure-pages@v5
 
