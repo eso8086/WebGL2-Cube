@@ -29,6 +29,9 @@ jobs:
       - name: Bundling with esbuild
         run: node serve.mjs --no-watch
 
+      - name: Creating symlink of esbuild output
+        run: ln -s ./dist/out.js out.js
+        
       - name: Setup Pages
         uses: actions/configure-pages@v5
 
