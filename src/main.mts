@@ -39,9 +39,9 @@ const modelData: IModelData = modelReader.read();
 const mesh = new Mesh(modelData, shader);
 
 const texturePromise: Promise<[HTMLImageElement, HTMLImageElement, HTMLImageElement]> = Promise.all([
-    getTextureImage("/src/textures/bottom.jpg"),
-    getTextureImage("/src/textures/side.jpg"),
-    getTextureImage("/src/textures/top.jpg")
+    getTextureImage("src/textures/bottom.jpg"),
+    getTextureImage("src/textures/side.jpg"),
+    getTextureImage("src/textures/top.jpg")
 ]);
 
 
