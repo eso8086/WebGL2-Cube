@@ -31,7 +31,8 @@ jobs:
 
       - name: Creating symlink of esbuild output
         run: ln -s ./dist/out.js out.js
-        
+      - name: Test
+        run: ls -la
       - name: Setup Pages
         uses: actions/configure-pages@v5
 
