@@ -78,7 +78,6 @@ export default class ModelReader{
         // PF stands for "per face"
         const totalVertexPFCount: number = cubeVertices.length / 3;
         const totalUVPFCount: number = cubeUV.length / 2;
-        // const totalUVPFCount: number = cubeUV.length / 3;
 
         // check data is valid.
 
