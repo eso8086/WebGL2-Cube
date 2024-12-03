@@ -4,8 +4,103 @@
     <meta charset="UTF-8">
     <title>WebGL Cube</title>
     <script defer src="/dist/out.js"></script>
+    <style>
+        *, *::after, *::before{
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html{
+            height: 100%;
+            width: 100%;
+        }
+        body{
+            height: 100%;
+            width: 100%;
+        }
+        /*html, body {*/
+        /*    height: 100%;*/
+        /*    margin: 0; !* Remove default margins *!*/
+        /*}*/
+
+        canvas{
+            width: 100%;
+            height: 100%;
+        }
+    </style>
 </head>
 <body>
     <canvas id="canvas"></canvas>
 </body>
+
+<!-- Vertex Shader -->
+<script id="vertexShader" type="x-shader/x-vertex">
+    #version 300 es
+    precision mediump float;
+
+    in vec4 a_pos;
+    in vec3 a_normal;
+    in vec2 a_uv;
+
+    uniform mat4 u_model;
+    uniform mat4 u_projection;
+    uniform mat4 u_normal;
+
+    out vec3 v_lightIntensity;
+    out vec2 v_uv;
+    out vec3 v_normal;
+
+
+    void main(){
+        gl_Position = u_projection * u_model * a_pos;
+
+        vec3 ambientLColor = vec3(0.3, 0.3, 0.3);    // blackish
+        vec3 diffuseLColor = vec3(1, 1, 1); // white
+        vec3 lightDirection = normalize(vec3(0.5, 0.5, 0.2));
+
+        vec4 transformedNormal = u_normal * vec4(a_normal, 1);
+        float diffuseIntensity = max(dot(transformedNormal.xyz, lightDirection), 0.0);
+
+        // pass to fragment s.
+        v_lightIntensity = ambientLColor + diffuseLColor * diffuseIntensity;
+        v_uv = a_uv;
+        v_normal = a_normal; //this is needed for determine which texture to use for face.
+    }
+
+</script>
+
+<!-- Fragment Shader -->
+<script id="fragmentShader" type="x-shader/x-fragment">
+    #version 300 es
+    precision mediump float;
+
+    in vec3 v_lightIntensity;
+    in vec2 v_uv;
+    in vec3 v_normal;
+
+    uniform sampler2D u_bottomSampler;
+    uniform sampler2D u_sideSampler;
+    uniform sampler2D u_topSampler;
+
+    out vec4 fragColor;
+    void main(){
+        vec4 bottomTexelColor = texture(u_bottomSampler, v_uv);
+        vec4 sideTexelColor = texture(u_sideSampler, v_uv);
+        vec4 topTexelColor = texture(u_topSampler, v_uv);
+
+        vec4 currentTexelColor;
+        if(v_normal.y > 0.0) {
+            currentTexelColor = topTexelColor;
+        }
+        else if(v_normal.y < 0.0){
+            currentTexelColor = bottomTexelColor;
+        }
+        else{
+           currentTexelColor = sideTexelColor;
+        }
+
+        fragColor = currentTexelColor * vec4(v_lightIntensity, 1);
+    }
+</script>
 </html>
