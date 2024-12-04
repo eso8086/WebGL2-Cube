@@ -12,7 +12,7 @@ let cubeMesh: Mesh;
 let controller: InputHandler;
 
 // camera
-let cameraPos: vec3 = vec3.fromValues(0, 0, 3);
+let cameraPos: vec3 = vec3.fromValues(0, 0, 15);
 let cameraFront: vec3 = vec3.fromValues(0, 0, -1);
 let cameraUp: vec3 = vec3.fromValues(0, 1, 0);
 
@@ -109,6 +109,16 @@ function render(t: DOMHighResTimeStamp){
     }
     if(keys.s){
         vec3.scaleAndAdd(cameraPos, cameraPos, cameraFront, -cameraSpeed);
+    }
+    if(keys.a){
+        const cross: vec3 = vec3.cross(vec3.create(), cameraFront, cameraUp);
+        vec3.normalize(cross, cross);
+        vec3.scaleAndAdd(cameraPos, cameraPos, cross, -cameraSpeed);
+    }
+    if(keys.d){
+        const cross: vec3 = vec3.cross(vec3.create(), cameraFront, cameraUp);
+        vec3.normalize(cross, cross);
+        vec3.scaleAndAdd(cameraPos, cameraPos, cross, cameraSpeed);
     }
 
 
