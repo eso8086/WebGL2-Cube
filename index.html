@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <title>WebGL Cube</title>
-    <script defer src="dist/out.js"></script>
+    <script defer type="module" src="dist/out.js"></script>
     <style>
         *, *::after, *::before{
             margin: 0;
@@ -32,6 +32,7 @@
 
     uniform mat4 u_model;
     uniform mat4 u_projection;
+    uniform mat4 u_view;
     uniform mat4 u_normal;
 
     out vec3 v_lightIntensity;
@@ -40,7 +41,7 @@
 
 
     void main(){
-        gl_Position = u_projection * u_model * a_pos;
+        gl_Position = u_projection * u_view * u_model * a_pos;
 
         vec3 ambientLColor = vec3(0.3, 0.3, 0.3);    // blackish
         vec3 diffuseLColor = vec3(1, 1, 1); // white

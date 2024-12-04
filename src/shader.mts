@@ -1,9 +1,4 @@
-// FRAGMENT_SHADER: 0x8B30;
-// VERTEX_SHADER: 0x8B31;
 import {mat4} from "gl-matrix";
-
-export type ShaderType = 0x8B30 | 0x8B31
-
 export default class Shader {
     public readonly program: WebGLProgram;
     constructor(VSrc: string, FSrc: string) {
@@ -16,14 +11,14 @@ export default class Shader {
         //TODO: possible parallel shader compilation. checkout mdn webgl best practices docs
         gl.shaderSource(vs, VSrc);
         gl.compileShader(vs);
-        const vse: string|null = this.checkCompilationError(vs, gl.VERTEX_SHADER);
+        const vse: string|null = this.checkCompilationError(vs);
         if(vse){
             alert(`Vertex shader compilation error.`);
             throw `ERROR - Vertex shader compilation failed.\n${vse}`;
         }
         gl.shaderSource(fs, FSrc);
         gl.compileShader(fs);
-        const fse:string|null = this.checkCompilationError(fs, gl.FRAGMENT_SHADER);
+        const fse:string|null = this.checkCompilationError(fs);
         if(fse){
             alert(`Fragment shader compilation error.`);
             throw `ERROR - Fragment shader compilation failed.\n${fse}`;
@@ -44,7 +39,7 @@ export default class Shader {
         gl.useProgram(this.program);
     }
 
-    private checkCompilationError(shader: WebGLShader, type: ShaderType): string | null{
+    private checkCompilationError(shader: WebGLShader): string | null{
         if(!gl.getShaderParameter(shader, gl.COMPILE_STATUS)) {
             return gl.getShaderInfoLog(shader);
         }

@@ -1,7 +1,7 @@
 import Shader from "./shader.mts";
 import {IModelData} from "./model-reader.mts";
 
-export class Mesh{
+export default class Mesh{
     public  VAO!: WebGLVertexArrayObject;
     private VBO!: WebGLBuffer;
     private EBO!: WebGLBuffer;
