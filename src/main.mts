@@ -3,13 +3,13 @@ import Shader from "./shader.mts";
 import ModelReader, {IModelData} from "./model-reader.mts";
 import {mat4, vec3} from "gl-matrix";
 import {getTextureImage} from "./utils.mts";
-import Controller from "./controller.mts";
+import InputHandler from "./input-handler.mts";
 
 
 // engine components
 let shader: Shader;
 let cubeMesh: Mesh;
-let controller: Controller;
+let controller: InputHandler;
 
 // camera
 let cameraPos: vec3 = vec3.fromValues(0, 0, 3);
@@ -61,7 +61,7 @@ async function prepareRendering(){
     const modelData: IModelData = modelReader.read();
     cubeMesh = new Mesh(modelData, shader);
 
-    controller = new Controller();
+    controller = new InputHandler();
 
     bottomTex = gl.createTexture();
     topTex = gl.createTexture();
@@ -97,7 +97,7 @@ function render(t: DOMHighResTimeStamp){
     dt = t - lastFrame;
     lastFrame = t;
 
-    controller.listenMouseEvents();
+    controller.listenKeyboardEvents();
 
 
     // Mouse
@@ -105,12 +105,10 @@ function render(t: DOMHighResTimeStamp){
     //FIXME: figure out this
     const cameraSpeed = 2.5 * dt * 10;
     if(keys.w){
-        const scaledCameraFront: vec3 = vec3.scale(vec3.create(), cameraFront, cameraSpeed)
-        vec3.add(cameraPos, cameraPos, scaledCameraFront);
+        vec3.scaleAndAdd(cameraPos, cameraPos, cameraFront, cameraSpeed);
     }
     if(keys.s){
-        const scaledCameraFront: vec3 = vec3.scale(vec3.create(), cameraFront, cameraSpeed);
-        vec3.subtract(cameraPos, cameraPos, scaledCameraFront);
+        vec3.scaleAndAdd(cameraPos, cameraPos, cameraFront, -cameraSpeed);
     }
 
 
