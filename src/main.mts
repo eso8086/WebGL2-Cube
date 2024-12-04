@@ -25,16 +25,16 @@ let dt: number = 0, lastFrame: number = 0, cubeRotation: number = 0;
 
 
 async function prepareRendering(){
-    if(!window.canvas){
+    if(!(window as any).canvas){
         throw `ERROR - <canvas id="canvas"></canvas> element not found in DOM`;
     }
 
-    window.canvas = canvas;
+    (window as any).canvas = canvas;
 
     canvas.width = document.documentElement.clientWidth;
     canvas.height = document.documentElement.clientHeight;
 
-    window.gl = canvas.getContext("webgl2")!;
+    (window as any).gl = canvas.getContext("webgl2")!;
 
     if(!gl){
         throw "Error: failed to get WebGL2 context";
