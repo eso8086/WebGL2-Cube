@@ -13,7 +13,7 @@ window.canvas = canvas;
 canvas.width = document.documentElement.clientWidth;
 canvas.height = document.documentElement.clientHeight;
 
-window.gl = canvas.getContext("webgl2");
+window.gl = canvas.getContext("webgl2")!;
 
 if(!gl){
     throw "Error: failed to get WebGL2 context";
@@ -60,7 +60,7 @@ texturePromise.then(([bottom, side, top]: [HTMLImageElement, HTMLImageElement, H
     gl.bindTexture(gl.TEXTURE_2D, sideTex);
     gl.texImage2D(gl.TEXTURE_2D, 0, gl.RGBA, gl.RGBA, gl.UNSIGNED_BYTE, side);
     gl.generateMipmap(gl.TEXTURE_2D);
-    
+
     gl.bindTexture(gl.TEXTURE_2D, topTex);
     gl.texImage2D(gl.TEXTURE_2D, 0, gl.RGBA, gl.RGBA, gl.UNSIGNED_BYTE, top);
     gl.generateMipmap(gl.TEXTURE_2D);
