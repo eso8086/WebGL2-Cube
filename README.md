@@ -4,7 +4,7 @@
 This is a simple WebGL2 3D cube implementation with the following features:
 - VBO, EBO, VAO.
 - Shader Program
-- Camera Projection(Perspective)
+- Projection(Perspective)
 - Phong shading
 
 
