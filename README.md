@@ -7,6 +7,7 @@ This is a simple WebGL2 3D cube implementation with the following features:
 - Projection(Perspective)
 - Phong shading
 
+Project link: https://eso8086.github.io/WebGL2-Cube
 
 ## How to Run
 
